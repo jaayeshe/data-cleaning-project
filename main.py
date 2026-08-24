@@ -62,3 +62,6 @@ for col in columns:
     if df[col].dtype in(float, int):
         df[col] = df[col].fillna(df[col].mean())
 
+    else:
+        #  dropping all the rows with missing records for non number columns
+        df.dropna(subset=col, inplace=True)
