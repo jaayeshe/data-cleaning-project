@@ -68,4 +68,4 @@ for col in columns:
         df.dropna(subset=col, inplace=True)
 
 #  data is cleaned
-print(f"congratulations Dataset is cleaned! \n # of Rows : {df.shape[0]} # of Columns: {df.shape[1]}")
+print(f"Congratulationssss Dataset is cleaned! \n # of Rows : {df.shape[0]} # of Columns: {df.shape[1]}")
