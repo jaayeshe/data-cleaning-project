@@ -59,9 +59,13 @@ print(f"Dataset contain missing value by columns \n{missing_value_columns}")
 
 columns = df.columns
 for col in columns:
+    # filling mean for numeric columns all rows
     if df[col].dtype in(float, int):
         df[col] = df[col].fillna(df[col].mean())
 
     else:
         #  dropping all the rows with missing records for non number columns
         df.dropna(subset=col, inplace=True)
+
+#  data is cleaned
+# hello bitch
