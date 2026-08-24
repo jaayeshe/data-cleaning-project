@@ -68,4 +68,4 @@ for col in columns:
         df.dropna(subset=col, inplace=True)
 
 #  data is cleaned
-# hello bitch
+print(f"congrats")
