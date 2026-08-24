@@ -27,3 +27,11 @@ else:
     else:
         print("Unknown file type")
 
+#  showing number of records
+print(f"Dataset Contain Total Rows: {data.shape[0]} \n Total Columns: {data.shape[1]}")
+
+# start cleaning
+
+#  checking duplicates
+duplicates = data.duplicated()
+total_duplicate = data.duplicated().sum()
