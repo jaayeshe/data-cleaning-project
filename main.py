@@ -35,3 +35,30 @@ print(f"Dataset Contain Total Rows: {data.shape[0]} \n Total Columns: {data.shap
 #  checking duplicates
 duplicates = data.duplicated()
 total_duplicate = data.duplicated().sum()
+
+print(f"Dataset has total duplicates records :  {total_duplicate}")
+
+# saving the duplicates
+if total_duplicate > 0:
+    duplicate_records = data[duplicates]
+    duplicate_records.to_csv(f'{data_name}_duplicates.csv', index = None)
+
+#  deleting duplicates
+df = data.drop_duplicates()
+
+# find missing values
+total_missing_value = df.isnull().sum().sum()
+missing_value_columns = df.isnull().sum()
+
+print(f"Dataset has Total Missing Value: {total_missing_value}")
+print(f"Dataset contain missing value by columns \n{missing_value_columns}")
+
+#  DEALING WITH MISSING VALUES
+#  fillna -- int and float
+# dropna --any object
+
+columns = df.columns
+for col in columns:
+    if df[col].dtype in(float, int):
+        df[col] = df[col].fillna(df[col].mean())
+
