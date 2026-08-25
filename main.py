@@ -13,6 +13,13 @@ import random
 def data_cleaning_master(data_path, data_name):
 
     print("Thank you for providing the details!")
+
+    sec = random.randint(1,4) # generating random number
+
+    # print delay message
+    print(f"Please wait for {sec} seconds! Checking file path")
+    time.sleep(sec)
+
     # checking if the path exists
     if not os.path.exists(data_path):
         print("Please Enter Correct Path. Try Again")
@@ -31,16 +38,28 @@ def data_cleaning_master(data_path, data_name):
             print("Unknown file type")
             return
 
+    # print delay message
+        print(f"Please wait for {sec} seconds! Checking total columns & rows")
+        time.sleep(sec)
+
     #  showing number of records
     print(f"Dataset Contain Total Rows: {data.shape[0]} \n Total Columns: {data.shape[1]}")
 
     # start cleaning
+
+    # print delay message
+    print(f"Please wait for {sec} seconds! Checking total duplicates")
+    time.sleep(sec)
 
     #  checking duplicates
     duplicates = data.duplicated()
     total_duplicate = data.duplicated().sum()
 
     print(f"Dataset has total duplicates records :  {total_duplicate}")
+
+    # print delay message
+    print(f"Please wait for {sec} seconds! Saving total duplicate rows")
+    time.sleep(sec)
 
     # saving the duplicates
     if total_duplicate > 0:
@@ -49,6 +68,10 @@ def data_cleaning_master(data_path, data_name):
 
     #  deleting duplicates
     df = data.drop_duplicates()
+
+    # print delay message
+    print(f"Please wait for {sec} seconds! Checking for missing values")
+    time.sleep(sec)
 
     # find missing values
     total_missing_value = df.isnull().sum().sum()
@@ -61,6 +84,10 @@ def data_cleaning_master(data_path, data_name):
     #  fillna -- int and float
     # dropna --any object
 
+    # print delay message
+    print(f"Please wait for {sec} seconds! Cleaning datasets")
+    time.sleep(sec)
+
     columns = df.columns
     for col in columns:
         # filling mean for numeric columns all rows
@@ -70,6 +97,11 @@ def data_cleaning_master(data_path, data_name):
         else:
             #  dropping all the rows with missing records for non number columns
             df.dropna(subset=col, inplace=True)
+
+    # print delay message
+    print(f"Please wait for {sec} seconds! Exporting datasets")
+    time.sleep(sec)
+
 
     #  data is cleaned
     print(f"Congratulations Dataset is cleaned! \n # of Rows : {df.shape[0]} # of Columns: {df.shape[1]}")
