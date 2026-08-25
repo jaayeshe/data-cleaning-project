@@ -7,70 +7,73 @@ import xlrd
 import os
 import random
 
-data_path = ''
-data_name = ''
+# data_path = 'day19_sales.xlsx'
+# data_name = 'jan_sales'
 
-# checking if the path exists
-if not os.path.exists(data_path):
-    print("Please Enter Correct Path. Try Again")
-    # return
+def data_cleaning_master(data_path, data_name):
 
-else:
-    #  checking the file type 
-    if data_path.endswith('.csv'):
-        print('Dataset is CSV!')
-        data = pd.read_csv(data_path, encoding_errors='ignore')
-
-    elif data_path.endswith('xlsx'):
-        print('Dataset is Excel file')
-        data = pd.read_xlsx(data_path, encoding_errors='ignore')
-    else:
-        print("Unknown file type")
-
-#  showing number of records
-print(f"Dataset Contain Total Rows: {data.shape[0]} \n Total Columns: {data.shape[1]}")
-
-# start cleaning
-
-#  checking duplicates
-duplicates = data.duplicated()
-total_duplicate = data.duplicated().sum()
-
-print(f"Dataset has total duplicates records :  {total_duplicate}")
-
-# saving the duplicates
-if total_duplicate > 0:
-    duplicate_records = data[duplicates]
-    duplicate_records.to_csv(f'{data_name}_duplicates.csv', index = None)
-
-#  deleting duplicates
-df = data.drop_duplicates()
-
-# find missing values
-total_missing_value = df.isnull().sum().sum()
-missing_value_columns = df.isnull().sum()
-
-print(f"Dataset has Total Missing Value: {total_missing_value}")
-print(f"Dataset contain missing value by columns \n{missing_value_columns}")
-
-#  DEALING WITH MISSING VALUES
-#  fillna -- int and float
-# dropna --any object
-
-columns = df.columns
-for col in columns:
-    # filling mean for numeric columns all rows
-    if df[col].dtype in(float, int):
-        df[col] = df[col].fillna(df[col].mean())
+    print("Thank you for providing the details!")
+    # checking if the path exists
+    if not os.path.exists(data_path):
+        print("Please Enter Correct Path. Try Again")
+        return
 
     else:
-        #  dropping all the rows with missing records for non number columns
-        df.dropna(subset=col, inplace=True)
+        #  checking the file type 
+        if data_path.endswith('.csv'):
+            print('Dataset is CSV!')
+            data = pd.read_csv(data_path, encoding_errors='ignore')
 
-#  data is cleaned
-print(f"Congratulationssss Dataset is cleaned! \n # of Rows : {df.shape[0]} # of Columns: {df.shape[1]}")
+        elif data_path.endswith('xlsx'):
+            print('Dataset is Excel file')
+            data = pd.read_excel(data_path)
+        else:
+            print("Unknown file type")
+            return
 
-#  saving the clean dataset
-df.to_csv(f'{data_name}_Clean_data.csv', index=None)
-print("Dataset is Saved!")
+    #  showing number of records
+    print(f"Dataset Contain Total Rows: {data.shape[0]} \n Total Columns: {data.shape[1]}")
 
+    # start cleaning
+
+    #  checking duplicates
+    duplicates = data.duplicated()
+    total_duplicate = data.duplicated().sum()
+
+    print(f"Dataset has total duplicates records :  {total_duplicate}")
+
+    # saving the duplicates
+    if total_duplicate > 0:
+        duplicate_records = data[duplicates]
+        duplicate_records.to_csv(f'{data_name}_duplicates.csv', index = None)
+
+    #  deleting duplicates
+    df = data.drop_duplicates()
+
+    # find missing values
+    total_missing_value = df.isnull().sum().sum()
+    missing_value_columns = df.isnull().sum()
+
+    print(f"Dataset has Total Missing Value : {total_missing_value}")
+    print(f"Dataset contain missing value by columns \n{missing_value_columns}")
+
+    #  DEALING WITH MISSING VALUES
+    #  fillna -- int and float
+    # dropna --any object
+
+    columns = df.columns
+    for col in columns:
+        # filling mean for numeric columns all rows
+        if df[col].dtype in(float, int):
+            df[col] = df[col].fillna(df[col].mean())
+
+        else:
+            #  dropping all the rows with missing records for non number columns
+            df.dropna(subset=col, inplace=True)
+
+    #  data is cleaned
+    print(f"Congratulations Dataset is cleaned! \n # of Rows : {df.shape[0]} # of Columns: {df.shape[1]}")
+
+    #  saving the clean dataset
+    df.to_csv(f'{data_name}_Clean_data.csv', index=None)
+    print("Dataset is Saved!")
