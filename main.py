@@ -69,3 +69,8 @@ for col in columns:
 
 #  data is cleaned
 print(f"Congratulationssss Dataset is cleaned! \n # of Rows : {df.shape[0]} # of Columns: {df.shape[1]}")
+
+#  saving the clean dataset
+df.to_csv(f'{data_name}_Clean_data.csv', index=None)
+print("Dataset is Saved!")
+
