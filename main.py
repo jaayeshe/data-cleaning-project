@@ -109,3 +109,4 @@ def data_cleaning_master(data_path, data_name):
     #  saving the clean dataset
     df.to_csv(f'{data_name}_Clean_data.csv', index=None)
     print("Dataset is Saved!")
+    
