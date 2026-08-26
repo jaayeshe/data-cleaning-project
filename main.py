@@ -22,7 +22,7 @@ def data_cleaning_master(data_path, data_name):
 
     # checking if the path exists
     if not os.path.exists(data_path):
-        print("Please Enter Correct Path. Try Again")
+        print("Incorrect Path! Try Again with correct path")
         return
 
     else:
@@ -104,9 +104,18 @@ def data_cleaning_master(data_path, data_name):
 
 
     #  data is cleaned
-    print(f"Congratulations Dataset is cleaned! \n # of Rows : {df.shape[0]} # of Columns: {df.shape[1]}")
+    print(f"Congratulations Dataset is cleaned! \n No. of Rows : {df.shape[0]} No. of Columns: {df.shape[1]}")
 
     #  saving the clean dataset
     df.to_csv(f'{data_name}_Clean_data.csv', index=None)
     print("Dataset is Saved!")
-    
+
+if __name__ == "__main__":
+
+    print("Welcome to Data Cleaning Master!")
+    # ask path & filename
+    data_path = input("Please enter dataset path :")
+    data_name = input("Please enter dataset name :")
+
+    # calling the function
+    data_cleaning_master(data_path, data_name)
